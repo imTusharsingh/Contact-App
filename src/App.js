@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux"
+import store from "./redux/store"
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import Header from "./screen/Header"
+import Contacts from './screen/Contacts'
+import AddContact from './screen/AddContact'
+import EditContact from "./screen/EditContact"
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <Router>
+        <ToastContainer />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Contacts />} />
+          <Route path="/addContact" element={<AddContact />} />
+          <Route path="/edit/:id" element={<EditContact />} />
+        </Routes>
+      </Router>
+    </Provider>
+  )
 }
 
 export default App;
